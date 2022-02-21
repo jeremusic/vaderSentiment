@@ -26,36 +26,21 @@ import sys
 # ##Constants##
 
 # (empirically derived mean sentiment intensity rating increase for booster words)
-B_INCR = 0.293
-B_DECR = -0.293
+#B_INCR = 0.293
+#B_DECR = -0.293
 
 # (empirically derived mean sentiment intensity rating increase for using ALLCAPs to emphasize a word)
-C_INCR = 0.733
-N_SCALAR = -0.74
+#C_INCR = 0.733
+#N_SCALAR = -0.74
 
 
-exclamation_Constant = 0.292
-qm_low_Constant = 0.18 
-qm_high_Constant = 0.96
+#exclamation_Constant = 0.292
+#qm_low_Constant = 0.18 
+#qm_high_Constant = 0.96
 
 
-constant_but_decrease = 0.5
-constant_but_increases = 1.5
-
-
-#Over-write the default values with the parsed ones with dimensionality of n=9
-if len(sys.argv) > 1:
-    B_INCR = sys.argv[1]
-    B_DECR = sys.argv[2]
-    # (empirically derived mean sentiment intensity rating increase for using ALLCAPs to emphasize a word)
-    C_INCR = sys.argv[3]
-    N_SCALAR = sys.argv[4]
-    exclamation_Constant = sys.argv[5]
-    qm_low_Constant = sys.argv[6]
-    qm_high_Constant = sys.argv[7]
-    constant_but_decrease = sys.argv[8]
-    constant_but_increases = sys.argv[9]
-  
+#constant_but_decrease = 0.5
+#constant_but_increases = 1.5
 
 
 
