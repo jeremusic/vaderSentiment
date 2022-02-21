@@ -227,7 +227,7 @@ class SentimentIntensityAnalyzer(object):
     Give a sentiment intensity score to sentences.
     """
 
-    def __init__(self, lexicon_file="vader_lexicon.txt", emoji_lexicon="emoji_utf8_lexicon.txt"):
+    def __init__(self, lexicon_file="vader_lexicon.txt", emoji_lexicon="emoji_utf8_lexicon.txt", B_INCR = 0.293, B_DECR = -0.293,C_INCR = 0.733, N_SCALAR = -0.74, exclamation_Constant = 0.292,qm_low_Constant = 0.18,qm_high_Constant = 0.96,constant_but_decrease = 0.5,constant_but_increases = 1.5):
         _this_module_file_path_ = os.path.abspath(getsourcefile(lambda: 0))
         lexicon_full_filepath = os.path.join(os.path.dirname(_this_module_file_path_), lexicon_file)
         with codecs.open(lexicon_full_filepath, encoding='utf-8') as f:
