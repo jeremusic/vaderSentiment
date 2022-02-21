@@ -19,6 +19,9 @@ import json
 from itertools import product
 from inspect import getsourcefile
 from io import open
+import sys
+
+
 
 # ##Constants##
 
@@ -29,6 +32,34 @@ B_DECR = -0.293
 # (empirically derived mean sentiment intensity rating increase for using ALLCAPs to emphasize a word)
 C_INCR = 0.733
 N_SCALAR = -0.74
+
+
+exclamation_Constant = 0.292
+qm_low_Constant = 0.18 
+qm_high_Constant = 0.96
+
+
+constant_but_decrease = 0.5
+constant_but_increases = 1.5
+
+
+#Over-write the default values with the parsed ones with dimensionality of n=9
+if len(sys.argv) > 1:
+    B_INCR = sys.argv[1]
+    B_DECR = sys.argv[2]
+    # (empirically derived mean sentiment intensity rating increase for using ALLCAPs to emphasize a word)
+    C_INCR = sys.argv[3]
+    N_SCALAR = sys.argv[4]
+    exclamation_Constant = sys.argv[5]
+    qm_low_Constant = sys.argv[6]
+    qm_high_Constant = sys.argv[7]
+    constant_but_decrease = sys.argv[8]
+    constant_but_increases = sys.argv[9]
+  
+
+
+
+
 
 NEGATE = \
     ["aint", "arent", "cannot", "cant", "couldnt", "darent", "didnt", "doesnt",
@@ -329,6 +360,8 @@ class SentimentIntensityAnalyzer(object):
             valence = valence * N_SCALAR
         return valence
 
+
+
     @staticmethod
     def _but_check(words_and_emoticons, sentiments):
         # check for modification in sentiment due to contrastive conjunction 'but'
@@ -339,10 +372,10 @@ class SentimentIntensityAnalyzer(object):
                 si = sentiments.index(sentiment)
                 if si < bi:
                     sentiments.pop(si)
-                    sentiments.insert(si, sentiment * 0.5)
+                    sentiments.insert(si, sentiment * constant_but_decrease)
                 elif si > bi:
                     sentiments.pop(si)
-                    sentiments.insert(si, sentiment * 1.5)
+                    sentiments.insert(si, sentiment * constant_but_increases)
         return sentiments
 
     @staticmethod
@@ -433,6 +466,9 @@ class SentimentIntensityAnalyzer(object):
         punct_emph_amplifier = ep_amplifier + qm_amplifier
         return punct_emph_amplifier
 
+
+
+
     @staticmethod
     def _amplify_ep(text):
         # check for added emphasis resulting from exclamation points (up to 4 of them)
@@ -441,7 +477,7 @@ class SentimentIntensityAnalyzer(object):
             ep_count = 4
         # (empirically derived mean sentiment intensity rating increase for
         # exclamation points)
-        ep_amplifier = ep_count * 0.292
+        ep_amplifier = ep_count * exclamation_Constant
         return ep_amplifier
 
     @staticmethod
@@ -453,9 +489,9 @@ class SentimentIntensityAnalyzer(object):
             if qm_count <= 3:
                 # (empirically derived mean sentiment intensity rating increase for
                 # question marks)
-                qm_amplifier = qm_count * 0.18
+                qm_amplifier = qm_count * qm_low_Constant
             else:
-                qm_amplifier = 0.96
+                qm_amplifier = qm_high_Constant
         return qm_amplifier
 
     @staticmethod
