@@ -26,21 +26,21 @@ import sys
 # ##Constants##
 
 # (empirically derived mean sentiment intensity rating increase for booster words)
-#B_INCR = 0.293
-#B_DECR = -0.293
+B_INCR = 0.293
+B_DECR = -0.293
 
 # (empirically derived mean sentiment intensity rating increase for using ALLCAPs to emphasize a word)
-#C_INCR = 0.733
-#N_SCALAR = -0.74
+C_INCR = 0.733
+N_SCALAR = -0.74
 
 
-#exclamation_Constant = 0.292
-#qm_low_Constant = 0.18 
-#qm_high_Constant = 0.96
+exclamation_Constant = 0.292
+qm_low_Constant = 0.18 
+qm_high_Constant = 0.96
 
 
-#constant_but_decrease = 0.5
-#constant_but_increases = 1.5
+constant_but_decrease = 0.5
+constant_but_increases = 1.5
 
 
 
